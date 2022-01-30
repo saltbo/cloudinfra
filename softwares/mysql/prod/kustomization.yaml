@@ -5,6 +5,7 @@ resources:
   - ../base
 patchesStrategicMerge:
   - storage-class.yaml
+  - statefulset.yaml
 secretGenerator:
   - name: csi-s3-secret
     envs:
