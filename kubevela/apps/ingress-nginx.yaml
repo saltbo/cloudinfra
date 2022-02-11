@@ -1,0 +1,17 @@
+apiVersion: core.oam.dev/v1beta1
+kind: Application
+metadata:
+  name: ingress-nginx
+spec:
+  components:
+    - name: ingress-nginx
+      type: helm
+      properties:
+        chart: ingress-nginx
+        targetNamespace: kube-system
+        url: https://kubernetes.github.io/ingress-nginx
+        repoType: helm
+        values:
+          hostNetwork: true
+          image:
+            registry: docker.io
