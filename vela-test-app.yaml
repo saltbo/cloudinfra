@@ -15,9 +15,6 @@ spec:
             domain: zpan.cce.me
             http:
               "/": 8222
-        - type: ingress-cert
-          properties:
-            certIssuer: testabc
         - type: node-selector
           properties:
             nodeSelector:

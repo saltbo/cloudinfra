@@ -1,4 +1,4 @@
-#/bin/bash
+#!/bin/bash
 
 helm repo add kubevela https://charts.kubevela.net/core
 helm repo update
