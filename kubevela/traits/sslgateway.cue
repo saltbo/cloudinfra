@@ -58,7 +58,7 @@ template: {
 					]
 					tls: [{
 						hosts: [parameter.domain]
-						secretName: "cert-caddy"
+						secretName: "cert-"+parameter.domain
 					}]
 				}
 			}

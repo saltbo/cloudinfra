@@ -1,17 +1,26 @@
 apiVersion: core.oam.dev/v1beta1
 kind: Application
 metadata:
-  name: first-vela-app
+  name: zpan-demo
 spec:
   components:
-    - name: express-server
+    - name: zpan
       type: webservice
       properties:
-        image: crccheck/hello-world
-        port: 8000
+        image: saltbo/zpan
+        port: 8222
       traits:
-        - type: sslgateway
+        - type: gateway
           properties:
-            domain: hello.saltbo.cn
+            domain: zpan.cce.me
             http:
-              "/": 8000
+              "/": 8222
+        - type: ingress-cert
+          properties:
+            certIssuer: testabc
+        - type: node-selector
+          properties:
+            nodeSelector:
+              usefor.saltbo.cn: boblab
+            tolerations:
+              "node.kubernetes.io/unschedulable": ""
