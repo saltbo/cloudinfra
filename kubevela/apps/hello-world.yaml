@@ -1,20 +1,21 @@
 apiVersion: core.oam.dev/v1beta1
 kind: Application
 metadata:
-  name: zpan-demo
+  name: hello
 spec:
   components:
-    - name: zpan
+    - name: hello
       type: webservice
       properties:
-        image: saltbo/zpan
-        port: 8222
+        image: saltbo/hello-world
+        port: 8000
       traits:
-        - type: gateway
+        - type: sslgateway
           properties:
-            domain: zpan.cce.me
+            domain: hello.saltbo.cn
+            certIssuer: letsencrypt.org
             http:
-              "/": 8222
+              "/": 8000
         - type: node-selector
           properties:
             nodeSelector:

@@ -1,0 +1,41 @@
+apiVersion: core.oam.dev/v1beta1
+kind: Application
+metadata:
+  name: frps
+spec:
+  components:
+    - name: frps
+      type: webservice
+      properties:
+        image: stilleshan/frps
+        cmd: [ "/frp/frps", "-c", "/etc/frp/frps.ini" ]
+        ports:
+          - port: 7000
+        volumeMounts:
+          configMap:
+            - name: frps
+              cmName: frps
+              mountPath: /etc/frp
+        env:
+          - name: FRP_ADMIN_PASSWD
+            valueFrom:
+              secretKeyRef:
+                name: frps
+                key: FRP_ADMIN_PASSWD
+          - name: FRP_AUTH_TOKEN
+            valueFrom:
+              secretKeyRef:
+                name: frps
+                key: FRP_AUTH_TOKEN
+      traits:
+        - type: gateway
+          properties:
+            domain: "*.dev.saltbo.cn"
+            http:
+              "/": 80
+        - type: node-selector
+          properties:
+            nodeSelector:
+              usefor.saltbo.cn: boblab
+            tolerations:
+              "node.kubernetes.io/unschedulable": ""

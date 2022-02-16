@@ -33,7 +33,7 @@ template: {
 					name: context.name
 					annotations: {
 						if !parameter.classInSpec {
-							"kubernetes.io/ingress.class": "xxxxx"
+							"kubernetes.io/ingress.class": parameter.class
 						}
 						if parameter.certIssuer != _|_ {
 							"cert-manager.io/issuer": parameter.certIssuer
