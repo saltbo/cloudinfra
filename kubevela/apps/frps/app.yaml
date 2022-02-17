@@ -10,7 +10,10 @@ spec:
         image: stilleshan/frps
         cmd: [ "/frp/frps", "-c", "/etc/frp/frps.ini" ]
         ports:
+          - port: 80
+            expose: true
           - port: 7000
+            expose: true
         volumeMounts:
           configMap:
             - name: frps
@@ -28,11 +31,13 @@ spec:
                 name: frps
                 key: FRP_AUTH_TOKEN
       traits:
-        - type: gateway
+        - type: x-gateway
           properties:
-            domain: "*.dev.saltbo.cn"
-            http:
-              "/": 80
+            certIssuer: letsencrypt.org
+            routes:
+              - domain: "*.dev.saltbo.cn"
+                http:
+                  "/": 80
         - type: node-selector
           properties:
             nodeSelector:
