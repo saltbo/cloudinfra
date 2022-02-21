@@ -39,13 +39,14 @@ template: {
 							]
 						}
 					]
-//					tls: [
-//						for _, route in parameter.routes {
-//							if route.enableTLS {
-//								hosts: [route.domain]
-//								secretName: "cert-"+route.domain
-//							}
-//					}]
+					tls: [
+						// for _, r in parameter.routes {
+						// 	if r.enableTLS {
+						// 		hosts: [r.domain]
+						// 		secretName: "cert-"+r.domain
+						// 	}
+						// }
+					]
 				}
 			}
 	}
@@ -61,6 +62,9 @@ template: {
 						{
 							// +usage=Specify the domain you want to expose
 							domain: string
+
+							// +usage=Specify the tls switch
+							enableTLS?: *false | bool
 
 							// +usage=Specify the mapping relationship between the http path and the workload port
 							http: [string]: int
