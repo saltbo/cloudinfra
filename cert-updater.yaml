@@ -1,0 +1,51 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: acme-updater
+spec:
+  schedule: "2 2 */15 */2 *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          initContainers:
+          - name: issue
+            image: neilpang/acme.sh
+            imagePullPolicy: IfNotPresent
+            command:
+            - --register-account 
+            - -m 
+            - saltbo@foxmail.com
+            - --issue
+            - --dns 
+            - dns_ali 
+            - -d 
+            - saltbo.cn
+            - -d 
+            - "*.saltbo.cn"
+            envFrom:
+              - secretRef:
+                  name: aksk-alidns
+            volumeMounts:
+              - mountPath: /acme.sh
+                name: acme
+          containers:
+          - name: deploy
+            image: neilpang/acme.sh
+            imagePullPolicy: IfNotPresent
+            command:
+            - --deploy
+            - --deploy-hook 
+            - qiniu
+            - -d 
+            - "saltbo.cn"
+            envFrom:
+              - secretRef:
+                  name: aksk-qiniu
+            volumeMounts:
+              - mountPath: /acme.sh
+                name: acme
+          restartPolicy: OnFailure
+          volumes:
+            - name: acme
+              emptyDir: {}
