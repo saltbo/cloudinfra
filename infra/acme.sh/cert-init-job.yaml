@@ -1,0 +1,56 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: cert-init
+spec:
+  template:
+    spec:
+      initContainers:
+      - name: issue
+        image: neilpang/acme.sh
+        imagePullPolicy: IfNotPresent
+        command:
+        - --register-account 
+        - -m 
+        - saltbo@foxmail.com
+        - --issue
+        - --dns 
+        - dns_ali 
+        - -d 
+        - saltbo.cn
+        - -d 
+        - "*.saltbo.cn"
+        envFrom:
+          - secretRef:
+              name: aksk-alidns
+        volumeMounts:
+          - mountPath: /acme.sh
+            name: acme
+      containers:
+      - name: deploy
+        image: neilpang/acme.sh
+        imagePullPolicy: IfNotPresent
+        command:
+        - --deploy
+        - --deploy-hook 
+        - qiniu
+        - -d 
+        - "saltbo.cn"
+        envFrom:
+          - secretRef:
+              name: aksk-qiniu
+        volumeMounts:
+          - mountPath: /acme.sh
+            name: acme
+      restartPolicy: OnFailure
+      volumes:
+        - name: acme
+          hostPath:
+            path: /data/acme.sh
+            type: DirectoryOrCreate
+      nodeSelector:
+        usefor.saltbo.cn: boblab
+      tolerations:
+        - key: "node.kubernetes.io/unschedulable"
+          operator: "Exists"
+          effect: "NoSchedule"

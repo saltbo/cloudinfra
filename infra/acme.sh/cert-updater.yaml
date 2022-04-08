@@ -1,0 +1,36 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: acme-updater
+spec:
+  schedule: "2 2 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: updater
+            image: neilpang/acme.sh
+            imagePullPolicy: IfNotPresent
+            command:
+            - --cron
+            - --renew-hook 
+            - "acme.sh --deploy --deploy-hook qiniu -d saltbo.cn"
+            envFrom:
+              - secretRef:
+                  name: aksk-qiniu
+            volumeMounts:
+              - mountPath: /acme.sh
+                name: acme
+          restartPolicy: OnFailure
+          volumes:
+            - name: acme
+              hostPath:
+                path: /data/acme.sh
+                type: DirectoryOrCreate
+          nodeSelector:
+            usefor.saltbo.cn: boblab
+          tolerations:
+            - key: "node.kubernetes.io/unschedulable"
+              operator: "Exists"
+              effect: "NoSchedule"
