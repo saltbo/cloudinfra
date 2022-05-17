@@ -1,0 +1,27 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/issuer: letsencrypt.org
+    oam.dev/kubevela-version: v1.2.2
+    nginx.ingress.kubernetes.io/backend-protocol: "GRPC"
+  name: rslocald-grpc
+  namespace: default
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: 'rslocal.saltbo.cn'
+    http:
+      paths:
+      - backend:
+          service:
+            name: rslocald
+            port:
+              number: 8422
+        path: /
+        pathType: ImplementationSpecific
+  tls:
+  - hosts:
+    - rslocal.saltbo.cn
+    secretName: cert-rslocal.saltbo.cn
+

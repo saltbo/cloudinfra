@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: rslocald
+data:
+  rslocald.toml: |
+    [core]
+    debug = false
+    bind_addr = "0.0.0.0:8422"
+    auth_method = "token"  # token, oidc
+    allow_ports = "18000-19000"
+
+    [http]
+    bind_addr = "0.0.0.0:8423"
+    default_domain = "dev.saltbo.cn"
+    # default_static = "/etc/rslocal/webroot" # support later
+
+    [tokens]
+    bob = "rslocald_abc11"
+    alice = "rslocald_abc32"
+
+    #[oidc]
+    #issuer = ""
+    #audience = ""
