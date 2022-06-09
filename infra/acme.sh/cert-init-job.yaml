@@ -35,7 +35,10 @@ spec:
         - --deploy-hook 
         - qiniu
         - -d 
-        - "saltbo.cn"
+        - saltbo.cn
+        env:
+          - name: QINIU_CDN_DOMAIN
+            value: "saltbo.cn .saltbo.cn"
         envFrom:
           - secretRef:
               name: aksk-qiniu

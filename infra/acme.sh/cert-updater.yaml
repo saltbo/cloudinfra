@@ -16,6 +16,9 @@ spec:
             - --cron
             - --renew-hook 
             - "acme.sh --deploy --deploy-hook qiniu -d saltbo.cn"
+            env:
+              - name: QINIU_CDN_DOMAIN
+                value: "saltbo.cn .saltbo.cn"
             envFrom:
               - secretRef:
                   name: aksk-qiniu
