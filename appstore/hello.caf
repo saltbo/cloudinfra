@@ -1,0 +1,6 @@
+{
+    "name": "hello",
+    "intro": "A http server echo hello.",
+    "image": "saltbo/hello",
+    "port": 8000,
+}
