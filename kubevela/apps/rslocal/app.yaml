@@ -23,7 +23,7 @@ spec:
           properties:
             certIssuer: letsencrypt.org
             routes:
-              - domain: "*.dev.saltbo.cn"
+              - domain: "*.dev.saltbo.fun"
                 http:
                   "/": 8423
         - type: node-selector

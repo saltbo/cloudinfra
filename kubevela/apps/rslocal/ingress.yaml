@@ -10,7 +10,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-  - host: 'rslocal.saltbo.cn'
+  - host: 'rslocal.saltbo.fun'
     http:
       paths:
       - backend:
@@ -22,6 +22,6 @@ spec:
         pathType: ImplementationSpecific
   tls:
   - hosts:
-    - rslocal.saltbo.cn
-    secretName: cert-rslocal.saltbo.cn
+    - rslocal.saltbo.fun
+    secretName: cert-rslocal.saltbo.fun
 
