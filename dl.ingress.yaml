@@ -3,7 +3,7 @@ kind: Ingress
 metadata:
   annotations:
     cert-manager.io/issuer: letsencrypt.org
-    nginx.ingress.kubernetes.io/permanent-redirect: https://storage.saltbo.cn
+    nginx.ingress.kubernetes.io/permanent-redirect: https://storage.saltbo.cn/$request_uri
   name: dl
   namespace: default
 spec:
