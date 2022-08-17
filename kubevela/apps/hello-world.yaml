@@ -12,7 +12,7 @@ spec:
       traits:
         - type: sslgateway
           properties:
-            domain: hello.saltbo.cn
+            domain: hello.saltbo.fun
             certIssuer: letsencrypt.org
             http:
               "/": 8000

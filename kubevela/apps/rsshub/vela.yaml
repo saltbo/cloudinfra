@@ -14,7 +14,7 @@ spec:
       traits:
         - type: sslgateway
           properties:
-            domain: "rsshub.saltbo.cn"
+            domain: "rsshub.saltbo.fun"
             certIssuer: letsencrypt.org
             http:
               "/": 1200
