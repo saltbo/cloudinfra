@@ -1,0 +1,20 @@
+apiVersion: core.oam.dev/v1beta1
+kind: Application
+metadata:
+  name: fundoc
+spec:
+  components:
+    - name: fundoc
+      type: webservice
+      properties:
+        image: saltbo/fundoc@sha256:d6a9de8b9a1e2ca837de9ae10e2de220866bba8d6392b8abb104bbce7e9e7e83
+        ports:
+          - port: 80
+
+      traits:
+        - type: sslgateway
+          properties:
+            domain: "www.saltbo.fun"
+            certIssuer: letsencrypt.org
+            http:
+              "/": 80
