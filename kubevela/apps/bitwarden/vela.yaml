@@ -1,0 +1,32 @@
+apiVersion: core.oam.dev/v1beta1
+kind: Application
+metadata:
+  name: bitwarden
+spec:
+  components:
+    - name: bitwarden
+      type: webservice
+      properties:
+        image: vaultwarden/server:latest
+        ports:
+          - port: 80
+
+      traits:
+        - type: storage
+          properties:
+            pvc:
+              - name: object-storage-bitwarden
+                mountPath: /data
+                accessModes:
+                  - ReadWriteOnce
+                  - ReadOnlyMany
+                resources:
+                  requests:
+                    storage: 10Gi
+                storageClassName: csi-s3
+        - type: sslgateway
+          properties:
+            domain: "bitwarden.saltbo.fun"
+            certIssuer: letsencrypt.org
+            http:
+              "/": 80
