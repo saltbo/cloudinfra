@@ -1,31 +1,33 @@
 apiVersion: core.oam.dev/v1beta1
 kind: Application
 metadata:
-  name: gitweb
+  name: music
 spec:
   components:
-    - name: gitweb
+    - name: music
       type: webservice
       properties:
-        image: invokr/cgit
+        image: foamzou/melody:latest
         ports:
-          - port: 80
+          - port: 5566
 
       traits:
         - type: storage
           properties:
             pvc:
-              - name: object-storage-git
-                mountPath: /git
+              - name: object-storage-melody
+                mountPath: /app/backend/.profile/
                 accessModes:
                   - ReadWriteOnce
                   - ReadOnlyMany
                 resources:
                   requests:
-                    storage: 10Gi
+                    storage: 100Mi
+                storageClassName: csi-s3
         - type: sslgateway
           properties:
-            domain: "git.saltbo.fun"
+            domain: "music.saltbo.fun"
             certIssuer: letsencrypt.org
             http:
-              "/": 80
+              "/": 5566
+
