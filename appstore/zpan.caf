@@ -1,9 +1,0 @@
-{
-    "name": "zpan",
-    "intro": "A http server echo hello.",
-    "image": "saltbo/zpan",
-    "port": 1200,
-    "depends": [
-        "mysql",
-    ]
-}

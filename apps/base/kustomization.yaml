@@ -1,0 +1,8 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - hello/vela.yaml
+  - bitwarden/vela.yaml
+  - fundoc/vela.yaml
+  - rsshub/vela.yaml
+  - music/vela.yaml

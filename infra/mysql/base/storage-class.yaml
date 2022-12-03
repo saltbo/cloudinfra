@@ -1,9 +1,0 @@
-kind: StorageClass
-apiVersion: storage.k8s.io/v1
-metadata:
-  name: csi-s3
-provisioner: ch.ctrox.csi.s3-driver
-parameters:
-  # specify which mounter to use
-  # can be set to rclone, s3fs, goofys or s3backer
-  mounter: rclone

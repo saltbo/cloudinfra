@@ -1,0 +1,23 @@
+apiVersion: core.oam.dev/v1beta1
+kind: Application
+metadata:
+  name: bitwarden
+spec:
+  components:
+    - name: bitwarden
+      type: webservice
+      properties:
+        image: vaultwarden/server:1.26.0
+        ports:
+          - port: 80
+        env:
+          - name: DATABASE_URL
+            value: "mysql://root:L5uY9T55d34!@mysql.infra-system:3306/bitwarden?charset=utf8&parseTime=True&loc=Local"
+
+      traits:
+        - type: sslgateway
+          properties:
+            domain: "bitwarden.saltbo.fun"
+            certIssuer: letsencrypt.org
+            http:
+              "/": 80

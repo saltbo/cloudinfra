@@ -1,0 +1,31 @@
+apiVersion: core.oam.dev/v1beta1
+kind: Application
+metadata:
+  name: music
+spec:
+  components:
+    - name: music
+      type: webservice
+      properties:
+        image: foamzou/melody:latest
+        ports:
+          - port: 5566
+
+      traits:
+        - type: storage
+          properties:
+            pvc:
+              - name: melody
+                mountPath: /app/backend/.profile/
+                accessModes:
+                  - ReadWriteOnce
+                resources:
+                  requests:
+                    storage: 10Mi
+        - type: sslgateway
+          properties:
+            domain: "music.saltbo.fun"
+            certIssuer: letsencrypt.org
+            http:
+              "/": 5566
+

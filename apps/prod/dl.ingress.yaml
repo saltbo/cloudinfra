@@ -1,0 +1,41 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt.org
+    nginx.ingress.kubernetes.io/permanent-redirect: https://storage.saltbo.cn$request_uri
+    traefik.ingress.kubernetes.io/router.middlewares: default-httpredirect@kubernetescrd,default-dlredirect@kubernetescrd
+  name: dl
+  namespace: default
+spec:
+  defaultBackend:
+    service:
+      name: hello
+      port:
+        number: 8000
+  # ingressClassName: "nginx"
+  tls:
+  - hosts:
+    - dl.saltbo.cn
+    secretName: cert-dl.saltbo.cn
+
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: httpredirect
+spec:
+  redirectScheme:
+    scheme: https
+    permanent: true
+
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: dlredirect
+spec:
+  redirectRegex:
+    regex: ^https://dl.saltbo.cn/(.*)
+    replacement: https://storage.saltbo.cn/${1}
+    permanent: true

@@ -1,6 +1,0 @@
-{
-    "name": "rsshub",
-    "intro": "A http server echo hello.",
-    "image": "diygod/rsshub",
-    "port": 1200,
-}

@@ -1,0 +1,20 @@
+apiVersion: core.oam.dev/v1beta1
+kind: Application
+metadata:
+  name: rsshub
+spec:
+  components:
+    - name: rsshub
+      type: webservice
+      properties:
+        image: diygod/rsshub
+        ports:
+          - port: 1200
+
+      traits:
+        - type: sslgateway
+          properties:
+            domain: "rsshub.saltbo.fun"
+            certIssuer: letsencrypt.org
+            http:
+              "/": 1200
