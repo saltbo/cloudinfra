@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt.org
+  name: kiae
+  namespace: kiae-system
+spec:
+  rules:
+    - host: kiae.saltbo.fun
+      http:
+        paths:
+          - backend:
+              service:
+                name: kiae
+                port:
+                  number: 8081
+            pathType: ImplementationSpecific
+            path: /
+  # ingressClassName: "nginx"
+  tls:
+  - hosts:
+    - kiae.saltbo.fun
+    secretName: cert-kiae.saltbo.fun
