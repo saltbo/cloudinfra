@@ -23,9 +23,3 @@ spec:
             certIssuer: letsencrypt.org
             http:
               "/": 8222
-        - type: node-selector
-          properties:
-            nodeSelector:
-              usefor.saltbo.cn: boblab
-            tolerations:
-              "node.kubernetes.io/unschedulable": ""

@@ -19,10 +19,10 @@ spec:
                 mountPath: /git
                 accessModes:
                   - ReadWriteOnce
-                  - ReadOnlyMany
+                  # - ReadOnlyMany
                 resources:
                   requests:
-                    storage: 10Gi
+                    storage: 100Gi
         - type: sslgateway
           properties:
             domain: "git.saltbo.fun"

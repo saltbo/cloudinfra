@@ -6,3 +6,6 @@ resources:
   - fundoc/vela.yaml
   - rsshub/vela.yaml
   - music/vela.yaml
+  - git/vela.yaml
+  - zpan/app.yaml
+  - zpan/config.yaml
