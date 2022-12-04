@@ -1,4 +1,4 @@
-apiVersion: batch/v1beta1
+apiVersion: batch/v1
 kind: CronJob
 metadata:
   name: acme-updater
@@ -31,9 +31,3 @@ spec:
               hostPath:
                 path: /data/acme.sh
                 type: DirectoryOrCreate
-          nodeSelector:
-            usefor.saltbo.cn: boblab
-          tolerations:
-            - key: "node.kubernetes.io/unschedulable"
-              operator: "Exists"
-              effect: "NoSchedule"

@@ -3,3 +3,10 @@ kind: Kustomization
 resources:
   - ../base
   - dl.ingress.yaml
+secretGenerator:
+  - name: aksk-alidns
+    envs:
+      - alidns-secret.txt
+  - name: aksk-qiniu
+    envs:
+      - qiniu-secret.txt

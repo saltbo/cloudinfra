@@ -51,9 +51,3 @@ spec:
           hostPath:
             path: /data/acme.sh
             type: DirectoryOrCreate
-      nodeSelector:
-        usefor.saltbo.cn: boblab
-      tolerations:
-        - key: "node.kubernetes.io/unschedulable"
-          operator: "Exists"
-          effect: "NoSchedule"

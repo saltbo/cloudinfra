@@ -9,3 +9,5 @@ resources:
   - git/vela.yaml
   - zpan/app.yaml
   - zpan/config.yaml
+  - acme.sh/cert-init-job.yaml
+  - acme.sh/cert-updater.yaml
