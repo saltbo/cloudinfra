@@ -32,3 +32,7 @@ spec:
       dex:
         adminEmail: "saltbo@foxmail.com"
         adminPasswd: "$2y$10$2syMZX9lEXTmcTFJ2V4SCerD/IOG25s.98ZqqIbG6Err8EDuOdjgG"
+    mongodb:
+      volumePermissions:
+        enabled: true
+      useStatefulSet: true
