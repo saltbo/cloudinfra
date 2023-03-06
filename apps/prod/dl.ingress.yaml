@@ -8,6 +8,8 @@ metadata:
   name: dl
   namespace: default
 spec:
+  rules:
+    - host: "dl.saltbo.cn"
   defaultBackend:
     service:
       name: hello
@@ -15,9 +17,9 @@ spec:
         number: 8000
   # ingressClassName: "nginx"
   tls:
-  - hosts:
-    - dl.saltbo.cn
-    secretName: cert-dl.saltbo.cn
+    - hosts:
+        - dl.saltbo.cn
+      secretName: cert-dl.saltbo.cn
 
 ---
 apiVersion: traefik.containo.us/v1alpha1
