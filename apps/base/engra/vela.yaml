@@ -1,0 +1,20 @@
+apiVersion: core.oam.dev/v1beta1
+kind: Application
+metadata:
+  name: engra
+spec:
+  components:
+    - name: engra
+      type: webservice
+      properties:
+        image: registry.cn-beijing.aliyuncs.com/saltbo-mirrors/engra
+        ports:
+          - port: 8081
+
+      traits:
+        - type: sslgateway
+          properties:
+            domain: "engra.saltbo.cn"
+            certIssuer: letsencrypt.org
+            http:
+              "/": 8081
