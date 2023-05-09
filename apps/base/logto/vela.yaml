@@ -1,0 +1,37 @@
+apiVersion: core.oam.dev/v1beta1
+kind: Application
+metadata:
+  name: logto
+spec:
+  components:
+    - name: logto
+      type: webservice
+      properties:
+        image: svhd/logto:1.2.0
+        # cmd: ["sh", "-c", "npm run cli db seed -- --db-url postgres://postgres:p0stgr3s@postgres.infra-system.svc.cluster.local:5432/logto && npm start"]
+        ports:
+          - port: 3001
+          - port: 3002
+        env:
+          - name: TRUST_PROXY_HEADER
+            value: "1"
+          - name: ENDPOINT
+            value: https://id.saltbo.fun
+          - name: ADMIN_ENDPOINT
+            value: https://ida.saltbo.fun
+          - name: DB_URL
+            value: "postgres://postgres:p0stgr3s@postgres.infra-system.svc.cluster.local:5432/logto"
+
+      traits:
+        - type: x-gateway
+          properties:
+            certIssuer: letsencrypt.org
+            routes:
+              - domain: "id.saltbo.fun"
+                enableTLS: true
+                http:
+                  "/": 3001
+              - domain: "ida.saltbo.fun"
+                enableTLS: true
+                http:
+                  "/": 3002

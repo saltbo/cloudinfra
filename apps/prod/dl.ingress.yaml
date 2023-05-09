@@ -3,19 +3,23 @@ kind: Ingress
 metadata:
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt.org
-    nginx.ingress.kubernetes.io/permanent-redirect: https://storage.saltbo.cn$request_uri
+    # nginx.ingress.kubernetes.io/permanent-redirect: https://storage.saltbo.cn$request_uri
     traefik.ingress.kubernetes.io/router.middlewares: default-httpredirect@kubernetescrd,default-dlredirect@kubernetescrd
   name: dl
   namespace: default
 spec:
+  # ingressClassName: "nginx"
   rules:
     - host: "dl.saltbo.cn"
-  defaultBackend:
-    service:
-      name: hello
-      port:
-        number: 8000
-  # ingressClassName: "nginx"
+      http:
+        paths:
+          - path: "/"
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: hello
+                port:
+                  number: 8000
   tls:
     - hosts:
         - dl.saltbo.cn

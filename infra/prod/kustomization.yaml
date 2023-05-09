@@ -5,6 +5,7 @@ resources:
   - ../base/cert-manager
   # - ../base/storage
   - ../base/mysql
+  - ../base/postgres
 # patchesStrategicMerge:
 #   - csi-pv-cos.yaml
   # - mysql.yaml
@@ -15,5 +16,8 @@ secretGenerator:
   - name: mysql-secret
     envs:
       - mysql-secret.txt
+  - name: postgres-secret
+    envs:
+      - postgres-secret.txt
 generatorOptions:
   disableNameSuffixHash: true
