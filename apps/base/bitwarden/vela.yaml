@@ -10,11 +10,17 @@ spec:
         image: vaultwarden/server:1.26.0
         ports:
           - port: 80
-        env:
-          - name: DATABASE_URL
-            value: "mysql://root:L5uY9T55d34!@mysql.infra-system:3306/bitwarden?charset=utf8&parseTime=True&loc=Local"
-
       traits:
+        - type: storage
+          properties:
+            pvc:
+              - name: bitwarden
+                mountPath: /data
+                accessModes:
+                  - ReadWriteOnce
+                resources:
+                  requests:
+                    storage: 500Mi
         - type: sslgateway
           properties:
             domain: "bitwarden.saltbo.fun"

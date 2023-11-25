@@ -4,10 +4,10 @@ resources:
   - hello/vela.yaml
   - bitwarden/vela.yaml
   - fundoc/vela.yaml
-  - rsshub/vela.yaml
-  - music/vela.yaml
-  - git/vela.yaml
-  - zpan/app.yaml
-  - zpan/config.yaml
+  # - rsshub/vela.yaml
+  # - music/vela.yaml
+  # - git/vela.yaml
+  # - zpan/app.yaml
+  # - zpan/config.yaml
   - acme.sh/cert-init-job.yaml
   - acme.sh/cert-updater.yaml

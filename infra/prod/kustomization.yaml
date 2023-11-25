@@ -3,21 +3,22 @@ kind: Kustomization
 namespace: infra-system
 resources:
   - ../base/cert-manager
+  # - ../base/csi-s3
   # - ../base/storage
-  - ../base/mysql
-  - ../base/postgres
+  # - ../base/mysql
+  # - ../base/postgres
 # patchesStrategicMerge:
-#   - csi-pv-cos.yaml
+  # - csi-s3.yaml
   # - mysql.yaml
-secretGenerator:
-  - name: csi-s3-secret
-    envs:
-      - csi-s3-secret.txt
-  - name: mysql-secret
-    envs:
-      - mysql-secret.txt
-  - name: postgres-secret
-    envs:
-      - postgres-secret.txt
+# secretGenerator:
+#   - name: csi-s3-secret
+#     envs:
+#       - csi-s3-secret.txt
+#   - name: mysql-secret
+#     envs:
+#       - mysql-secret.txt
+#   - name: postgres-secret
+#     envs:
+#       - postgres-secret.txt
 generatorOptions:
   disableNameSuffixHash: true
