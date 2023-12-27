@@ -12,10 +12,6 @@ spec:
         ports:
           - port: 80
             expose: true
-          - port: 7000
-            expose: true
-          - port: 7500
-            expose: true
         volumeMounts:
           configMap:
             - name: frps
@@ -37,15 +33,11 @@ spec:
           properties:
             certIssuer: letsencrypt.org
             routes:
-              - domain: "frps.saltbo.cn"
-                http:
-                  "/": 7500
-              - domain: "*.dev.saltbo.cn"
+              # - domain: "*.dev.saltbo.fun"
+              #   enableTLS: true
+              #   http:
+              #     "/": 80
+              - domain: "holly.dev.saltbo.fun"
+                enableTLS: true
                 http:
                   "/": 80
-        - type: node-selector
-          properties:
-            nodeSelector:
-              usefor.saltbo.cn: boblab
-            tolerations:
-              "node.kubernetes.io/unschedulable": ""

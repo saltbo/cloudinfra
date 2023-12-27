@@ -26,9 +26,3 @@ spec:
               - domain: "*.dev.saltbo.fun"
                 http:
                   "/": 8423
-        - type: node-selector
-          properties:
-            nodeSelector:
-              usefor.saltbo.cn: boblab
-            tolerations:
-              "node.kubernetes.io/unschedulable": ""

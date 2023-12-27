@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: rslocald-grpc
+  namespace: default
+spec:
+  ports:
+  - name: tcp-8422
+    port: 8422
+    protocol: TCP
+    nodePort: 32000
+  selector:
+    app.oam.dev/component: rslocald
+  type: NodePort

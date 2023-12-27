@@ -5,14 +5,14 @@ metadata:
 data:
   rslocald.toml: |
     [core]
-    debug = false
+    debug = true
     bind_addr = "0.0.0.0:8422"
     auth_method = "token"  # token, oidc
     allow_ports = "18000-19000"
 
     [http]
     bind_addr = "0.0.0.0:8423"
-    default_domain = "dev.saltbo.cn"
+    default_domain = "dev.saltbo.fun"
     # default_static = "/etc/rslocal/webroot" # support later
 
     [tokens]
