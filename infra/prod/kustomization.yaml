@@ -6,19 +6,19 @@ resources:
   # - ../base/csi-s3
   # - ../base/storage
   # - ../base/mysql
-  # - ../base/postgres
+  - ../base/postgres
 # patchesStrategicMerge:
   # - csi-s3.yaml
   # - mysql.yaml
-# secretGenerator:
+secretGenerator:
 #   - name: csi-s3-secret
 #     envs:
 #       - csi-s3-secret.txt
 #   - name: mysql-secret
 #     envs:
 #       - mysql-secret.txt
-#   - name: postgres-secret
-#     envs:
-#       - postgres-secret.txt
+  - name: postgres-secret
+    envs:
+      - postgres-secret.txt
 generatorOptions:
   disableNameSuffixHash: true

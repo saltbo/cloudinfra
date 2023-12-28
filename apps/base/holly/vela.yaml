@@ -1,0 +1,32 @@
+apiVersion: core.oam.dev/v1beta1
+kind: Application
+metadata:
+  name: holly
+spec:
+  components:
+    - name: holly
+      type: webservice
+      properties:
+        image: saltbo/holly
+        cmd: ["sh", "-c", "npx -y prisma migrate deploy && node server.js"]
+        port: 3000
+        env:
+          - name: DATABASE_URL
+            value: "postgres://postgres:p0stgr3s@postgres.infra-system.svc.cluster.local:5432/holly"
+          - name: AWS_REGION
+            value: ap-beijing
+          - name: AWS_ACCESS_KEY_ID
+            value: AKID8BB2jEXdU7Y6TdZKhpplW5UgfS1NL6dy
+          - name: AWS_SECRET_ACCESS_KEY
+            value: CE3d09PVWLzPdeU6TdcQ1SivvgEaicGh
+          - name: DY_CLIENT_KEY
+            value: awcs3krd0db5hh74
+          - name: DY_CLIENT_SECRET
+            value: 97abae1728ea8beb8b8827272b29e2be
+      traits:
+        - type: sslgateway
+          properties:
+            domain: holly.saltbo.fun
+            certIssuer: letsencrypt.org
+            http:
+              "/": 3000
