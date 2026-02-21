@@ -7,7 +7,7 @@ spec:
     - name: bitwarden
       type: webservice
       properties:
-        image: vaultwarden/server:1.30.5
+        image: vaultwarden/server:1.35.3
         ports:
           - port: 80
       traits:
